@@ -93,6 +93,7 @@ class bw_easy_testimonials extends WP_Widget {
 		echo "<label for=\"" . $this->get_field_id('category_id') . "\" >Show Testimonials from Category:</label>";
 		echo "<select id=\"" . $this->get_field_id('category_id') . "\"" .
 			 "name=\"" . $this->get_field_name('category_id') . "\">";
+		echo "<option value='show-all-testimonials'>Show All</option>";
 
 		$category = get_categories('orderby=ID&order=ASC'); // get array of all categories
 		foreach ($category as $cat) {
@@ -136,7 +137,13 @@ class bw_easy_testimonials extends WP_Widget {
 		if ( $title )
 			echo $before_title . $title . $after_title;
 
-		$query_args = array( 'post_type' => 'testimonials', 'category_name' => $category_name );
+		if ( $instance['category_id'] == "show-all-testimonials") {
+			$query_args = array( 'post_type' => 'testimonials');
+		}
+		else {
+			$query_args = array( 'post_type' => 'testimonials', 'category_name' => $category_name );
+		}
+		
 		$loop = new WP_Query( $query_args );
 
 		while ( $loop->have_posts() ) : 
