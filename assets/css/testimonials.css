@@ -1,0 +1,12 @@
+blockquote {
+  border-left: 10px solid #333;
+}
+blockquote p {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+blockquote small {
+  color: #c60b46;
+  font-size: 12px;
+}
